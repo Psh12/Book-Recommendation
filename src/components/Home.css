@@ -1,0 +1,22 @@
+.home-container {
+  background: url('https://image2.thenewslens.com/2018/4/rf057txnhyds6et8r98qlhz434soxc.jpg') center center/cover no-repeat;
+  height: 88.8vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: insert 0 0 0 1000px rgba(0,0,0,0.2);
+  object-fit: contain;
+}
+
+.home-container > h1 {
+  color: #fff;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  font-size: 100px;
+  margin-top: 100px;
+}
+
+.home-btns {
+  margin-top: 32px;
+}
