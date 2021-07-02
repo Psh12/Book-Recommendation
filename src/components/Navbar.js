@@ -24,7 +24,7 @@ function Navbar() {
               </Link>
              </li>
              <li className='nav-item'>
-               <Link to='/log-in' className='nav-links'>
+               <Link to='/login' className='nav-links'>
                  Log In
                </Link>
              </li>
