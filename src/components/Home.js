@@ -1,22 +1,23 @@
-import React from 'react'
-import { Button } from './Button'
-import './Home.css'
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
-function Home() {
-  return (
-    <div className='home-container'>
-      <h1>Recommendations</h1>
-      <div className='home-btns'>
-      <Link to='/search'>
-        <Button className='btns'>SEARCH</Button>
-      </Link>
-      <Link to='/login'>
-        <Button className='btns'>LOG IN</Button>
-      </Link>
+import './Home.css'
+    
+class Home extends Component {
+  render() {
+    return (
+      <div className='home-container'>
+        <h1>Recommendations</h1>
+        <div className='home-btns'>
+          <Link to='/search'>
+            <button>SEARCH</button>
+          </Link>
+          <Link to='/login'>
+            <button>LOG IN</button>
+          </Link>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
-
+    
 export default Home;
