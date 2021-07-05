@@ -53,6 +53,7 @@ class Search extends Component {
 
   render() {
     const {term, people} = this.state;
+    const isTermBlank = term;
 
     return (
       <div className="App">
@@ -69,12 +70,12 @@ class Search extends Component {
           <br/>
         </div>
        <center>
-      {
+      { isTermBlank.length > 0 &&
         books.filter(searchingFor(term)).map(book => 
-              <div key={book.id}>
-                <a className="falseh1" href={book.link}> {book.title} </a>
-              </div>
-            )
+          <div key={book.id}>
+            <a className="falseh1" href={book.link}> {book.title} </a>
+          </div>
+        )
       }
       </center>
       </div>
