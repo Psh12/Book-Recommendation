@@ -1,0 +1,32 @@
+[
+	{
+		"title":"Harry Potter and the Philosopher Stone",
+		"author":"J.K. Rowling",
+		"genre":"Fantasy",
+		"demographic":"Young Adult"
+	},
+	{
+		"title":"The Hobbit",
+		"author":"J.R.R. Tolkien",
+		"genre":"Fantasy",
+		"demographic":"Teenagers"
+	},
+	{
+		"title":"Eragon",
+		"author":"Christopher Paolini",
+		"genre":"Fantasy",
+		"demographic":"Young Adult"
+	},
+	{
+		"title":"Pride and Prejudice",
+		"author":"Jane Austen",
+		"genre":"Historical Fiction",
+		"demographic":"Adult"
+	},
+	{
+		"title":"Clifford the Big Red Dog",
+		"author":"Norman Bridwell",
+		"genre":"Fiction",
+		"demographic":"Children"
+	}
+]
