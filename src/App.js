@@ -17,8 +17,8 @@ function App() {
           <Route path='/' exact component={Home} />
           <Route path='/search' exact component={Search}/>
           <Route path='/toggle' exact component={Toggle}/>
-		  <Route path='/login' exact component={Logging}/>
-		  <Route path='/register' exact component={Registering}/>
+		      <Route path='/login' exact component={Logging}/>
+		      <Route path='/register' exact component={Registering}/>
         </Switch>
       </Router>
     </>
