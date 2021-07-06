@@ -9,7 +9,7 @@ const books = [
     "author":"Christopher Paolini",
     "genre":"Fantasy",
     "demographic":"Young Adult",
-    "link": "http://localhost:3000/books/Eragon\n"
+    "link": "https://images-na.ssl-images-amazon.com/images/I/51uuWGQyLSL._SX330_BO1,204,203,200_.jpg\n"
   },
   {
     "id": 2,
@@ -17,7 +17,7 @@ const books = [
     "author":"Jane Austen",
     "genre":"Historical Fiction",
     "demographic":"Adult",
-    "link": "http://localhost:3000/books/Pride_and_Prejudice\n"
+    "link": "https://m.media-amazon.com/images/I/51tiK-eB3JL.jpg\n"
   },
   {
     "id": 3,
@@ -25,7 +25,7 @@ const books = [
     "author":"Norman Bridwell",
     "genre":"Fiction",
     "demographic":"Children",
-    "link": "http://localhost:3000/books/Clifford_the_Big_Red_Dog\n"
+    "link": "https://images-na.ssl-images-amazon.com/images/I/71lgBdNFjyL.jpg\n"
   }
 ]
 
@@ -52,7 +52,7 @@ class Search extends Component {
   }
 
   render() {
-    const {term, people} = this.state;
+    const {term, books} = this.state;
     const isTermBlank = term;
 
     return (
@@ -70,10 +70,14 @@ class Search extends Component {
           <br/>
         </div>
        <center>
-      { isTermBlank.length > 0 &&
+      { isTermBlank.length > 1 &&
         books.filter(searchingFor(term)).map(book => 
           <div key={book.id}>
-            <a className="falseh1" href={book.link}> {book.title} </a>
+            <Link to={{pathname: "/results", 
+              state: {
+                book: book,
+              }
+              }} className="falseh1"> {book.title} </Link>
           </div>
         )
       }
