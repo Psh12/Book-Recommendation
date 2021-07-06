@@ -38,7 +38,7 @@ class Register extends Component {
     return (
       <div>
         <center>
-		    <h1 id='headers'>Login</h1>
+		    <h1 id='headers'>Register</h1>
     
         <div id='headers2'>
           <br></br>
@@ -57,7 +57,7 @@ class Register extends Component {
             <label htmlFor="password">Password: </label>
             <input type="password" name="password" />
           </div>
-          <button id='button'>REGISTER</button>
+          <button id='button'>Register</button>
         </form>
         </div>
         </center>
