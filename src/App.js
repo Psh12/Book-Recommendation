@@ -9,23 +9,6 @@ import Search from './components/search/Search';
 import Toggle from './components/search/Toggle';
 import ResultPage from './components/search/ResultPage';
 
-<<<<<<< HEAD
-function App() {
-  return (
-    <>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/search' exact component={Search}/>
-          <Route path='/toggle' exact component={Toggle}/>
-		      <Route path='/login' exact component={Logging}/>
-		      <Route path='/register' exact component={Registering}/>
-        </Switch>
-      </Router>
-    </>
-  );
-=======
 class App extends Component {
   constructor() {
     super();
@@ -81,7 +64,6 @@ class App extends Component {
         </Router>
     );
   }
->>>>>>> 8946cfd8aad8f13ce7b7c18f2d89758a97b78745
 }
 
 export default App;
