@@ -60,9 +60,13 @@ class Search extends Component {
         <div style={{backgroundColor: '#121212', color: 'white'}}>
           <div style={{textAlign: 'center', padding: '20px'}}>
             <h1>Book Search</h1>
+            {
+            /*
             <Link to='/toggle'>
               <button className='btns'>Toggle</button>
             </Link>
+            */
+            }
           </div>
           <form>
             <input type="text" onChange={this.searchHandler} value={term}/>
