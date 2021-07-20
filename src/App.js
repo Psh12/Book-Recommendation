@@ -8,6 +8,7 @@ import Register from './components/login/Register';
 import Search from './components/search/Search';
 import Toggle from './components/search/Toggle';
 import ResultPage from './components/search/ResultPage';
+import HomeDisplay from './components/home_display/HomeDisplay';
 
 class App extends Component {
   constructor() {
@@ -65,6 +66,7 @@ componentDidMount(){
               )
             )}/>
             <Route exact path="/results" component={ResultPage}/>
+            <Route exact path="/test" component={HomeDisplay}/>
           </Switch>
         </Router>
     );

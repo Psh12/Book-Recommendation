@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Recommendations from './Recom.js';
 import './ResultPage.css';
 
 class ResultPage extends Component {
@@ -9,15 +10,19 @@ class ResultPage extends Component {
           <center>
             <h1> {this.props.location.state.book.title} </h1>
             <div class="box-container">
-              <div class="box-child">
+              <div class="box-thumb">
                 <img style={{height: 200}} src= {this.props.location.state.book.link} alt="result"/>
               </div>
-              <div class="box-child">
+              <div class="box-content">
                 <div>Author: {this.props.location.state.book.author}</div>
                 <div>Genre: {this.props.location.state.book.genre}</div>
                 <div>Target Audience: {this.props.location.state.book.demographic}</div>
+                <br></br>
+                <div>Synapsis: {this.props.location.state.book.synapsis}</div>
               </div>
             </div>
+            <br></br>
+            <Recommendations/>
           </center>
         </div>
     );
