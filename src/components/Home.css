@@ -1,5 +1,5 @@
 .home-container {
-  background: url('https://image2.thenewslens.com/2018/4/rf057txnhyds6et8r98qlhz434soxc.jpg') center center/cover no-repeat;
+  background: url('https://simpletransformers.ai/assets/images/home-1.jpg') center center/cover no-repeat;
   height: 88.8vh;
   width: 100%;
   display: flex;
@@ -18,5 +18,27 @@
 }
 
 .home-btns {
-  margin-top: 32px;
+  background-color: #242222;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button-a {
+  background-color: #242222;
+  color: white;
+  border: 2px solid #242222;
+}
+
+.button-a:hover {
+  background-color: #3d3939;
+  color: white;
 }

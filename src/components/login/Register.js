@@ -1,39 +1,51 @@
-import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { Component } from 'react';
+
 //import './Style.css';
 
 class Register extends Component {
   constructor () {
     super()
     this.state = {
-      user: {
-        userName: '',
-        emailName: '',
-        password: ''
-      },
-      redirect: false
+        email: '',
+        password: '',
+        name: ''
     }
   }
 
   handleChange = (e) => {
-    const updatedUser = {...this.state.user}
+    /*
+    const updatedUser = {...this.state}
     const inputField = e.target.name
     const inputValue = e.target.value
     updatedUser[inputField] = inputValue
-
-    this.setState({user: updatedUser})
+*/
+    this.setState({[e.target.name]: e.target.value})
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    this.props.mockLogIn(this.state.user)
-    this.setState({redirect: true})
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const body = {...this.state};
+      const response = await fetch("http://localhost:5000/auth/register",{
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(body)
+      });
+      const parseRes = await response.json();
+      if(parseRes.token){
+        localStorage.setItem("token", parseRes.token);
+        this.props.setAuth(true);
+      }
+      else{
+        this.props.setAuth(false);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+
   }
 
   render () {
-    if (this.state.redirect) {
-      return (<Redirect to="/LogIn"/>)
-    }
 
     return (
       <div>
@@ -47,15 +59,15 @@ class Register extends Component {
         <form onSubmit={this.handleSubmit}>
           <div>
             <label htmlFor="userName">User Name: </label>
-            <input type="text" name="userName" onChange={this.handleChange} value={this.state.user.userName} />
+            <input type="text" name="name" onChange={this.handleChange} value={this.state.name} autoComplete = "off" required />
           </div>
           <div>
             <label htmlFor="emailName">Email: </label>
-            <input type="email" name="emailName" onChange={this.handleChange} value={this.state.user.emailName} />
+            <input type="email" name="email" onChange={this.handleChange} value={this.state.email} autoComplete = "off" required/>
           </div>
           <div>
             <label htmlFor="password">Password: </label>
-            <input type="password" name="password" />
+            <input type="password" name="password"/>
           </div>
           <button id='button'>Register</button>
         </form>

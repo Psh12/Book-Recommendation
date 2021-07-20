@@ -17,7 +17,7 @@ class Navbar extends Component {
               <Link to='/search' className='nav-links'>Search</Link>
             </li>
             <li className='nav-item'>
-              <Link to='/search' className='nav-links'>User Page</Link>
+              <Link to='/userProfile' className='nav-links'>User Page</Link>
             </li>
             <li className='nav-item'>
               <Link to='/login' className='nav-links'>Log In</Link>
