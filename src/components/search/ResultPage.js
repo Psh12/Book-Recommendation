@@ -18,7 +18,7 @@ class ResultPage extends Component {
                 <div>Genre: {this.props.location.state.book.genre}</div>
                 <div>Target Audience: {this.props.location.state.book.demographic}</div>
                 <br></br>
-                <div>Synopsis: {this.props.location.state.book.synapsis}</div>
+                <div>Synopsis: {this.props.location.state.book.synopsis}</div>
               </div>
             </div>
           </center>
