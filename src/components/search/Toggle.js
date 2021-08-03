@@ -65,6 +65,12 @@ function searchingFor(term){
   }
 }
 
+function searchingForDem(demterm){
+  return function(x){
+    return x.demographic.toLowerCase().includes(demterm.toLowerCase()) || !demterm;
+  }
+}
+
 class Toggle extends Component {
   constructor(props){
     super(props);
@@ -72,6 +78,7 @@ class Toggle extends Component {
     this.state = {
       books: books,
       term: "",
+      demterm: "",
       check: "",
       dem: "" };
 
@@ -91,10 +98,11 @@ class Toggle extends Component {
   handleSubmit(event) {
     event.preventDefault()
     this.setState({ term: this.state.check })
+    this.setState({ demterm: this.state.dem })
   }
 
   render() {
-    const {term, books} = this.state;
+    const {term, demterm, books} = this.state;
     const isTermBlank = term;
 
     return (
@@ -129,7 +137,7 @@ class Toggle extends Component {
             </label>
             <br/>
             <label>
-              Select Demographics:
+              Select Age Demographics:
               <select value={this.state.dem} onChange={this.handleDemChange}>
                 <option value=""></option>
                 <option value="Children">Children</option>
@@ -144,7 +152,7 @@ class Toggle extends Component {
         </div>
        <center>
       { isTermBlank.length > 1 &&
-        books.filter(searchingFor(term)).map(book => 
+        books.filter(searchingFor(term)).filter(searchingForDem(demterm)).map(book => 
           <div key={book.id}>
             <Link to={{pathname: "/results", state: {book: book,} }} className="falseh1"> 
               <div class="post-container">                
