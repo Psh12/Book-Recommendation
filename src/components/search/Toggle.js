@@ -57,19 +57,7 @@ const books = [
     "link": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+380259254_140.jpg?SearchOrder=+-+OT,OS,TN,GO,FA\n",
     "synopsis": "In London, Dr John Watson convalesces, after his disastrous Afghan war experiences. Sharing rooms with an enigmatic, new acquaintance, Sherlock Holmes, their quiet bachelor life at 221B Baker Street is short-lived. A dead man is discovered in a grimy house in south-east London. His face contorted with horror and hatred. On the wall, the word 'rache' - German for 'revenge' - is written in blood, yet there are no wounds on the victim or signs of a struggle. Watson's head is in a whirl, but the formidable Holmes relishes the challenge - and a famous investigative partnership begins."
   }
-]
-
-function searchingFor(term){
-  return function(x){
-    return x.genre.toLowerCase().includes(term.toLowerCase()) || !term;
-  }
-}
-
-function searchingForDem(demterm){
-  return function(x){
-    return x.demographic.toLowerCase().includes(demterm.toLowerCase()) || !demterm;
-  }
-}
+];
 
 class Toggle extends Component {
   constructor(props){
@@ -77,8 +65,7 @@ class Toggle extends Component {
 
     this.state = {
       books: books,
-      term: "",
-      demterm: "",
+      resultBooks: [],
       check: "",
       dem: "" };
 
@@ -97,13 +84,89 @@ class Toggle extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.setState({ term: this.state.check })
-    this.setState({ demterm: this.state.dem })
+    var results = [];
+    var userGenre = this.state.check;
+    var userDemographic = this.state.dem;
+    var criteria = (userGenre !== "") + (userDemographic !== "");
+
+    // Set all book match values to 0
+    var matchValues = [];
+
+    for (var i = 0; i < books.length; i++) {
+      matchValues.push(0);
+    };
+
+    // Run through database list and if genre and demographics match, increase match value
+
+    for (var i = 0; i < books.length; i++) {
+      if (books[i]["genre"] === userGenre) {
+        matchValues[i] += 1;
+      };
+      if (books[i]["demographic"] === userDemographic) {
+        matchValues[i] += 1;
+      };
+      results.push(books[i]);
+    };
+
+    // Quick sort
+
+    function swap(arr, i, j){
+      var temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+      var temp2 = results[i];
+      results[i] = results[j];
+      results[j] = temp2;
+    }
+
+    function partition(arr, pivot, left, right){
+      var pivotValue = arr[pivot],
+          partitionIndex = left;
+
+      for(var i = left; i < right; i++){
+        if(arr[i] > pivotValue){
+          swap(arr, i, partitionIndex);
+          partitionIndex++;
+        }
+      }
+      swap(arr, right, partitionIndex);
+      return partitionIndex;
+    }
+      
+    function quickSort(arr, left, right){
+      var len = arr.length, 
+      pivot, 
+      partitionIndex;
+
+
+      if(left < right){
+        pivot = right;
+        partitionIndex = partition(arr, pivot, left, right);
+    
+       //sort left and right
+      quickSort(arr, left, partitionIndex - 1);
+      quickSort(arr, partitionIndex + 1, right);
+      }
+      return arr;
+    }
+
+    // Sort
+    quickSort(matchValues, 0, matchValues.length - 1);
+    
+    // Clear elements that don't match by running through the list from the last element
+
+    for (var i = results.length - 1; i >= 0; i--) {
+      // Delete last element if its value is less than the number of inputs or it's equal to 0
+      if (matchValues[i] < criteria || matchValues[i] === 0) {
+          matchValues.pop()
+          results.pop()
+      }
+    }
+    this.setState({ resultBooks: results });
   }
 
   render() {
-    const {term, demterm, books} = this.state;
-    const isTermBlank = term;
+    const {resultBooks} = this.state;
 
     return (
       <div className="App">
@@ -151,8 +214,7 @@ class Toggle extends Component {
           <br/>
         </div>
        <center>
-      { isTermBlank.length > 1 &&
-        books.filter(searchingFor(term)).filter(searchingForDem(demterm)).map(book => 
+      { resultBooks.map(book => 
           <div key={book.book_number}>
             <Link to={{pathname: "/results", state: {book: book,} }} className="falseh1"> 
               <div class="post-container">                

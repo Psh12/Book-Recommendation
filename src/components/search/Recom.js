@@ -59,108 +59,117 @@ const books = [
   }
 ]
 
-var results = [];
-
-// Ask player for genre and demographic
-var userGenre = "Fantasy";
-
-var userDemographic = "Young Adult";
-
-var userTitle = "Harry Potter and the Philosopher Stone";
-
-// Set all book match values to 0
-var matchValues = [];
-
-for (var i = 0; i < books.length; i++) {
-  matchValues.push(0);
-};
-
-// Run through database list and if genre and demographics match, increase match value
-
-for (var i = 0; i < books.length; i++) {
-  if (books[i]["genre"] === userGenre) {
-    matchValues[i] += 1;
-  };
-  if (books[i]["demographic"] === userDemographic) {
-    matchValues[i] += 1;
-  };
-  results.push(books[i]);
-};
-
-// Quick sort
-
-function swap(arr, i, j){
-   var temp = arr[i];
-   arr[i] = arr[j];
-   arr[j] = temp;
-   var temp = results[i];
-   results[i] = results[j];
-   results[j] = temp;
-}
-
-function partition(arr, pivot, left, right){
-   var pivotValue = arr[pivot],
-       partitionIndex = left;
-
-   for(var i = left; i < right; i++){
-    if(arr[i] > pivotValue){
-      swap(arr, i, partitionIndex);
-      partitionIndex++;
-    }
-  }
-  swap(arr, right, partitionIndex);
-  return partitionIndex;
-}
-      
-function quickSort(arr, left, right){
-   var len = arr.length, 
-   pivot,
-   partitionIndex;
-
-
-  if(left < right){
-    pivot = right;
-    partitionIndex = partition(arr, pivot, left, right);
-    
-   //sort left and right
-   quickSort(arr, left, partitionIndex - 1);
-   quickSort(arr, partitionIndex + 1, right);
-  }
-  return arr;
-}
-
-// Sort
-quickSort(matchValues, 0, matchValues.length - 1);
-  
-// Clear elements that don't match
-
-results.splice(matchValues.indexOf(0), results.length);
-matchValues.splice(matchValues.indexOf(0), matchValues.length);
-
-for (var i = 0; i < results.length; i++) {
-  if (results[i]["title"] === userTitle) {
-    matchValues.splice(i, 1)
-    results.splice(i, 1)
-    break
-  }
-};
-
 class Recom extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      recom: results };
+      books: books,
+      resultBooks: [] };
+  }
+
+  componentDidMount() {
+    this.recomList();
+  }
+
+  recomList() {
+    var results = [];
+
+    // Ask player for genre and demographic
+    var userGenre = this.props.bookgen;
+
+    var userDemographic = this.props.bookdem;
+
+    var userTitle = this.props.booktitle;
+
+    // Set all book match values to 0
+    var matchValues = [];
+
+    for (var i = 0; i < books.length; i++) {
+      matchValues.push(0);
+    };
+
+    // Run through database list and if genre and demographics match, increase match value
+
+    for (var i = 0; i < books.length; i++) {
+      if (books[i]["genre"] === userGenre) {
+        matchValues[i] += 1;
+      };
+      if (books[i]["demographic"] === userDemographic) {
+        matchValues[i] += 1;
+      };
+      results.push(books[i]);
+    };
+
+    // Quick sort
+
+    function swap(arr, i, j){
+       var temp = arr[i];
+       arr[i] = arr[j];
+       arr[j] = temp;
+       var temp2 = results[i];
+       results[i] = results[j];
+       results[j] = temp2;
+    }
+
+    function partition(arr, pivot, left, right){
+       var pivotValue = arr[pivot],
+           partitionIndex = left;
+
+       for(var i = left; i < right; i++){
+        if(arr[i] > pivotValue){
+          swap(arr, i, partitionIndex);
+          partitionIndex++;
+        }
+      }
+      swap(arr, right, partitionIndex);
+      return partitionIndex;
+    }
+      
+    function quickSort(arr, left, right){
+       var len = arr.length, 
+       pivot,
+       partitionIndex;
+
+
+      if(left < right){
+        pivot = right;
+        partitionIndex = partition(arr, pivot, left, right);
+    
+       //sort left and right
+       quickSort(arr, left, partitionIndex - 1);
+       quickSort(arr, partitionIndex + 1, right);
+      }
+      return arr;
+    }
+
+    // Sort
+    quickSort(matchValues, 0, matchValues.length - 1);
+  
+    // Clear elements that don't match
+
+    results.splice(matchValues.indexOf(0), results.length);
+    matchValues.splice(matchValues.indexOf(0), matchValues.length);
+
+    for (var i = 0; i < results.length; i++) {
+      if (results[i]["title"] === userTitle) {
+        matchValues.splice(i, 1)
+        results.splice(i, 1)
+        break
+      }
+    }
+    console.log(results);
+    this.setState({ resultBooks: results });
   }
 
   render() {
-    const {recom} = this.state;
+    const {resultBooks} = this.state;
 
     return (
       <div className="App">
       <h3>Recommendations</h3>
        <center>
-      { recom.map(book => 
+      { resultBooks.map(book => 
           <div key={book.book_number}>
             <Link to={{pathname: "/results", state: {book: book,} }} className="falseh1"> 
               <div class="post-container">                
