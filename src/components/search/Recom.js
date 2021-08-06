@@ -65,7 +65,21 @@ class Recom extends Component {
 
     this.state = {
       books: books,
-      resultBooks: [] };
+      resultBooks: [],
+      title_ : this.props.booktitle,
+      demographic_ : this.props.bookdem,
+      genre_ : this.props.bookgenre };
+  }
+
+  fixBook() {
+    if (this.state.title_ !== this.props.booktitle) {
+      this.setState({ title_: this.props.booktitle });
+      this.recomList();
+    }
+    else {
+    console.log(this.state.title_);
+    console.log(this.props.booktitle);
+    }
   }
 
   componentDidMount() {
@@ -171,7 +185,7 @@ class Recom extends Component {
        <center>
       { resultBooks.map(book => 
           <div key={book.book_number}>
-            <Link to={{pathname: "/results", state: {book: book,} }} className="falseh1"> 
+            <Link onClick={this.fixBook()} to={{pathname: "/results", state: {book: book,} }} className="falseh1"> 
               <div class="post-container">                
                 <div class="post-thumb">
                   <img src={book.link} alt="book cover"/>

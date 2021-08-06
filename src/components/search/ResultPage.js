@@ -3,6 +3,7 @@ import Recommendations from './Recom.js';
 import './ResultPage.css';
 
 class ResultPage extends Component {
+
   render() {
     return (
         <div>
