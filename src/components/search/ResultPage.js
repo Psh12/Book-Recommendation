@@ -3,7 +3,6 @@ import Recommendations from './Recom.js';
 import './ResultPage.css';
 
 class ResultPage extends Component {
-
   render() {
     return (
         <div>
@@ -24,7 +23,7 @@ class ResultPage extends Component {
           </center>
           <br></br>
           <center>
-            <Recommendations/>
+            <Recommendations bookgen = {this.props.location.state.book.genre} bookdem = {this.props.location.state.book.demographic} booktitle = {this.props.location.state.book.title}/>
           </center>
         </div>
     );
