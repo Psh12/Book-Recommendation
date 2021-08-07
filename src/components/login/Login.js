@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import {toast} from 'react-toastify';
 
 
-import './Login.css';
+
 
 class LogIn extends Component {
   constructor () {
@@ -13,22 +14,19 @@ class LogIn extends Component {
       }
   }
 
+
 // Updates the state if on change in the text field
   handleChange = (e) => {
-    /*
-    const updatedUser = {...this.state}
-    const inputField = e.target.name
-    const inputValue = e.target.value
-    updatedUser[inputField] = inputValue
-    */
-  
+    
     this.setState({[e.target.name]: e.target.value})
   }
+
 
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const body = {...this.state};
+   
       const response = await fetch("http://localhost:5000/auth/login",{
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -38,9 +36,11 @@ class LogIn extends Component {
       if(parseRes.token){
         localStorage.setItem("token", parseRes.token);
         this.props.setAuth(true);
+        toast.success("Logged In Successfully");
       }
       else{
         this.props.setAuth(false);
+        toast.error(parseRes);
       }
     } catch (error) {
       console.error(error.message);
@@ -67,13 +67,14 @@ class LogIn extends Component {
           </div>
           <div>
             <label htmlFor="password">Password: </label>
-            <input type="password" name="password"/>
+            <input type="password" name="password" value = {this.state.password} onChange={this.handleChange}/>
           </div>
-          <button id='button'>Login</button>
+          <button>Login</button>
         </form>
         <Link to='/register'>Register</Link>
         </div>
         </center>
+        
         
       </div>
     )
