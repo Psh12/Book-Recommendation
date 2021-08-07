@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './Home.css'
+import "./Home.css"
     
 class Home extends Component {
   render() {
@@ -9,7 +9,7 @@ class Home extends Component {
         <h1>Recommendations</h1>
         <div className='home-btns'>
           <Link to='/search'>
-            <button>SEARCH</button>
+          <button>Search</button>
           </Link>
           <Link to='/login'>
             <button>LOG IN</button>

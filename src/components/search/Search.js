@@ -4,23 +4,7 @@ import './Search.css';
 
 const books = [
   {
-    "id": 1,
-    "title":"Eragon",
-    "author":"Christopher Paolini",
-    "genre":"Fantasy",
-    "demographic":"Young Adult",
-    "link": "https://images-na.ssl-images-amazon.com/images/I/51uuWGQyLSL._SX330_BO1,204,203,200_.jpg\n"
-  },
-  {
-    "id": 2,
-    "title":"Pride and Prejudice",
-    "author":"Jane Austen",
-    "genre":"Historical Fiction",
-    "demographic":"Adult",
-    "link": "https://m.media-amazon.com/images/I/51tiK-eB3JL.jpg\n"
-  },
-  {
-    "id": 3,
+    "book_number": ' 978-0-545-21578-7',
     "title":"Clifford the Big Red Dog",
     "author":"Norman Bridwell",
     "genre":"Fiction",
@@ -76,7 +60,7 @@ class Search extends Component {
        <center>
       { isTermBlank.length > 1 &&
         books.filter(searchingFor(term)).map(book => 
-          <div key={book.id}>
+          <div key={book.book_number}>
             <Link to={{pathname: "/results", 
               state: {
                 book: book,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {toast} from 'react-toastify';
 
 //import './Style.css';
 
@@ -35,9 +36,11 @@ class Register extends Component {
       if(parseRes.token){
         localStorage.setItem("token", parseRes.token);
         this.props.setAuth(true);
+        toast.success("Registration Successful");
       }
       else{
         this.props.setAuth(false);
+        toast.error(parseRes);
       }
     } catch (error) {
       console.error(error.message);
@@ -67,7 +70,7 @@ class Register extends Component {
           </div>
           <div>
             <label htmlFor="password">Password: </label>
-            <input type="password" name="password"/>
+            <input type="password" name="password" onChange = {this.handleChange} value = {this.state.password}/>
           </div>
           <button id='button'>Register</button>
         </form>

@@ -8,6 +8,10 @@ import Register from './components/login/Register';
 import Search from './components/search/Search';
 import Toggle from './components/search/Toggle';
 import ResultPage from './components/search/ResultPage';
+import { toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 
 class App extends Component {
   constructor() {
@@ -54,6 +58,7 @@ componentDidMount(){
                 <Redirect to= "/login"/>
               )
             )}/>
+  
             <Route exact path="/login" render={props => (
               !this.state.isAuthenticated ? (<LogIn {...props} setAuth = {this.setAuth}/>) : (
                 <Redirect to= "/userProfile"/>
