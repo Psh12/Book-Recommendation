@@ -7,12 +7,16 @@ class Home extends Component {
     return (
       <div className='home-container'>
         <h1>Recommendations</h1>
-        <div className='home-btns'>
+        
+        {/*<div className='display-container'>
+          <HomeDisplay/>
+        </div>*/}
+        <div className='home-btns-container'>
           <Link to='/search'>
-          <button>Search</button>
+            <button className='home-btns button-a'>SEARCH</button>
           </Link>
           <Link to='/login'>
-            <button>LOG IN</button>
+            <button className='home-btns button-a'>LOG IN</button>
           </Link>
         </div>
       </div>

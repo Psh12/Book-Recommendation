@@ -1,0 +1,21 @@
+.box-container {
+    margin: 20px 20px 0 0; 
+    width: 60%
+}
+
+.box-thumb {
+    float: left;
+}
+
+.box-thumb img {
+    height: 200px
+}
+
+.box-content {
+    margin-left: 210px
+}
+
+.box-title {
+    font-weight: bold;
+    font-size: 200%
+}

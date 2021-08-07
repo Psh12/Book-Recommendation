@@ -58,11 +58,28 @@ input {
 .falseh1 {
   color:  black;
   text-decoration: none;
-  display: block;
-  font-size: 2em;
-  margin-top: 0.67em;
-  margin-bottom: 0.67em;
-  margin-left: 0;
-  margin-right: 0;
-  font-weight: bold;
+}
+
+.post-container {
+    margin: 20px 20px 0 0; 
+    border: 5px solid #333;
+    overflow: auto;
+    width: 40%
+}
+
+.post-thumb {
+    float: left;
+}
+
+.post-thumb img {
+    height: 100px
+}
+
+.post-content {
+    margin-left: 150px
+}
+
+.post-title {
+    font-weight: bold;
+    font-size: 200%
 }

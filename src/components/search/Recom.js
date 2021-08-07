@@ -57,37 +57,44 @@ const books = [
     "link": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+380259254_140.jpg?SearchOrder=+-+OT,OS,TN,GO,FA\n",
     "synopsis": "In London, Dr John Watson convalesces, after his disastrous Afghan war experiences. Sharing rooms with an enigmatic, new acquaintance, Sherlock Holmes, their quiet bachelor life at 221B Baker Street is short-lived. A dead man is discovered in a grimy house in south-east London. His face contorted with horror and hatred. On the wall, the word 'rache' - German for 'revenge' - is written in blood, yet there are no wounds on the victim or signs of a struggle. Watson's head is in a whirl, but the formidable Holmes relishes the challenge - and a famous investigative partnership begins."
   }
-];
+]
 
-class Toggle extends Component {
+class Recom extends Component {
   constructor(props){
     super(props);
 
     this.state = {
       books: books,
       resultBooks: [],
-      check: "",
-      dem: "" };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleDemChange = this.handleDemChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+      title_ : this.props.booktitle,
+      demographic_ : this.props.bookdem,
+      genre_ : this.props.bookgenre };
   }
 
-  handleChange(event) {
-    this.setState({ check: event.target.value });
+  fixBook() {
+    if (this.state.title_ !== this.props.booktitle) {
+      this.setState({ title_: this.props.booktitle });
+      this.recomList();
+    }
+    else {
+    console.log(this.state.title_);
+    console.log(this.props.booktitle);
+    }
   }
 
-  handleDemChange(event) {
-    this.setState({ dem: event.target.value });
+  componentDidMount() {
+    this.recomList();
   }
 
-  handleSubmit(event) {
-    event.preventDefault()
+  recomList() {
     var results = [];
-    var userGenre = this.state.check;
-    var userDemographic = this.state.dem;
-    var criteria = (userGenre !== "") + (userDemographic !== "");
+
+    // Ask player for genre and demographic
+    var userGenre = this.props.bookgen;
+
+    var userDemographic = this.props.bookdem;
+
+    var userTitle = this.props.booktitle;
 
     // Set all book match values to 0
     var matchValues = [];
@@ -111,19 +118,19 @@ class Toggle extends Component {
     // Quick sort
 
     function swap(arr, i, j){
-      var temp = arr[i];
-      arr[i] = arr[j];
-      arr[j] = temp;
-      var temp2 = results[i];
-      results[i] = results[j];
-      results[j] = temp2;
+       var temp = arr[i];
+       arr[i] = arr[j];
+       arr[j] = temp;
+       var temp2 = results[i];
+       results[i] = results[j];
+       results[j] = temp2;
     }
 
     function partition(arr, pivot, left, right){
-      var pivotValue = arr[pivot],
-          partitionIndex = left;
+       var pivotValue = arr[pivot],
+           partitionIndex = left;
 
-      for(var i = left; i < right; i++){
+       for(var i = left; i < right; i++){
         if(arr[i] > pivotValue){
           swap(arr, i, partitionIndex);
           partitionIndex++;
@@ -134,9 +141,9 @@ class Toggle extends Component {
     }
       
     function quickSort(arr, left, right){
-      var len = arr.length, 
-      pivot, 
-      partitionIndex;
+       var len = arr.length, 
+       pivot,
+       partitionIndex;
 
 
       if(left < right){
@@ -144,24 +151,28 @@ class Toggle extends Component {
         partitionIndex = partition(arr, pivot, left, right);
     
        //sort left and right
-      quickSort(arr, left, partitionIndex - 1);
-      quickSort(arr, partitionIndex + 1, right);
+       quickSort(arr, left, partitionIndex - 1);
+       quickSort(arr, partitionIndex + 1, right);
       }
       return arr;
     }
 
     // Sort
     quickSort(matchValues, 0, matchValues.length - 1);
-    
-    // Clear elements that don't match by running through the list from the last element
+  
+    // Clear elements that don't match
 
-    for (var i = results.length - 1; i >= 0; i--) {
-      // Delete last element if its value is less than the number of inputs or it's equal to 0
-      if (matchValues[i] < criteria || matchValues[i] === 0) {
-          matchValues.pop()
-          results.pop()
+    results.splice(matchValues.indexOf(0), results.length);
+    matchValues.splice(matchValues.indexOf(0), matchValues.length);
+
+    for (var i = 0; i < results.length; i++) {
+      if (results[i]["title"] === userTitle) {
+        matchValues.splice(i, 1)
+        results.splice(i, 1)
+        break
       }
     }
+    console.log(results);
     this.setState({ resultBooks: results });
   }
 
@@ -170,53 +181,11 @@ class Toggle extends Component {
 
     return (
       <div className="App">
-        <div style={{backgroundColor: '#121212', color: 'white'}}>
-          <div style={{textAlign: 'center', padding: '20px'}}>
-            <h1>Filtered Search</h1>
-            <Link to='/search'>
-              <button className='btns'>Normal Search</button>
-            </Link>
-          </div>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Select Genre:
-              <select value={this.state.check} onChange={this.handleChange}>
-                <option value=""></option>
-                <option value="Action">Action</option>
-                <option value="Adventure">Adventure</option>
-                <option value="Comedy">Comedy</option>
-                <option value="Mystery">Mystery</option>
-                <option value="Fantasy">Fantasy</option>
-                <option value="Fiction">Fiction</option>
-                <option value="Historical Fiction">Historical Fiction</option>
-                <option value="Horror">Horror</option>
-                <option value="Romance">Romance</option>
-                <option value="Satire">Satire</option>
-                <option value="Science Fiction">Science Fiction</option>
-                <option value="Speculative">Speculative</option>
-                <option value="Thriller">Thriller</option>
-                <option value="Western">Western</option>
-              </select>
-            </label>
-            <br/>
-            <label>
-              Select Age Demographics:
-              <select value={this.state.dem} onChange={this.handleDemChange}>
-                <option value=""></option>
-                <option value="Children">Children</option>
-                <option value="Teenagers">Teenagers</option>
-                <option value="Young Adult">Young Adult</option>
-                <option value="Adult">Adult</option>
-              </select>
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-          <br/>
-        </div>
+      <h3>Recommendations</h3>
        <center>
       { resultBooks.map(book => 
           <div key={book.book_number}>
-            <Link to={{pathname: "/results", state: {book: book,} }} className="falseh1"> 
+            <Link onClick={this.fixBook()} to={{pathname: "/results", state: {book: book,} }} className="falseh1"> 
               <div class="post-container">                
                 <div class="post-thumb">
                   <img src={book.link} alt="book cover"/>
@@ -236,4 +205,4 @@ class Toggle extends Component {
   }
 }
 
-export default Toggle;
+export default Recom;
