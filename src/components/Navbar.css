@@ -30,6 +30,32 @@
 
 }
 
+.home-btns {
+  background-color: #242222;
+  
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button-a {
+  background-color: #242222;
+  color: white;
+  border: 2px solid #242222;
+}
+
+.button-a:hover {
+  background-color: #3d3939;
+  color: white;
+}
+
 .nav-menu {
   display: grid;
   grid-template-columns: repeat(4, auto);
@@ -63,6 +89,7 @@
 .menu-icon {
   display: none;
 }
+
 
 @media screen and (max-width: 960px) {
   .NavbarItems {
