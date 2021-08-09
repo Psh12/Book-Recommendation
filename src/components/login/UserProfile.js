@@ -42,17 +42,6 @@ class UserProfile extends Component {
    }
   
 
-   logOut = (e)=>{
-    e.preventDefault();
-     try {
-      localStorage.removeItem("token");
-      this.props.setAuth(false);
-      toast.success("Logged Out Successfully");
-     } catch (error) {
-       console.error(error.message);
-     }
-      
-   }
 
    deleteBook = async (book_number, user_id)=>{
      try {
@@ -61,6 +50,9 @@ class UserProfile extends Component {
          headers: {"token": localStorage.token}
        });
        const parseRes = await response.json();
+       if(parseRes.length > 0){
+         toast.success("Successfully deleted");
+       }
        
        // Set state so that you don't have to refresh to see the changes after deleting the book
        const newData = this.state.userData.filter(data => data.ub_id !== parseRes[0].ub_id);
@@ -84,7 +76,7 @@ class UserProfile extends Component {
         <div>
           <center>
             <h1>DashBoard {this.state.name}</h1>
-            <button onClick = {this.logOut}>logout</button>
+            
            {
              this.state.userData.map(book =>{
                

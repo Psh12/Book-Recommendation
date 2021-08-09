@@ -49,7 +49,7 @@ componentDidMount(){
     
     return (
         <Router>
-        <Navbar/>
+        <Navbar auth = {this.state.isAuthenticated} setAuth = {this.setAuth}/>
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/search" component={Search}/>
