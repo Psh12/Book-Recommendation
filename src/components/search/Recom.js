@@ -14,16 +14,12 @@ class Recom extends Component {
       genre_ : this.props.bookgenre };
   }
 
- 
-
   fixBook() {
     if (this.state.title_ !== this.props.booktitle) {
       this.setState({ title_: this.props.booktitle });
       this.recomList();
     }
-    else {
-      return;
-    }
+   
   }
 
   getBooks = async()=>{
@@ -57,13 +53,13 @@ class Recom extends Component {
     var matchValues = [];
    
 
-    for (var i = 0; i < this.state.books.length; i++) {
+    for (let i = 0; i < this.state.books.length; i++) {
       matchValues.push(0);
     };
 
     // Run through database list and if genre and demographics match, increase match value
 
-    for (var i = 0; i < this.state.books.length; i++) {
+    for (let i = 0; i < this.state.books.length; i++) {
       if (this.state.books[i]["genre"] === userGenre) {
         matchValues[i] += 1;
       };
@@ -88,7 +84,7 @@ class Recom extends Component {
        var pivotValue = arr[pivot],
            partitionIndex = left;
 
-       for(var i = left; i < right; i++){
+       for(let i = left; i < right; i++){
         if(arr[i] > pivotValue){
           swap(arr, i, partitionIndex);
           partitionIndex++;
@@ -123,7 +119,7 @@ class Recom extends Component {
     results.splice(matchValues.indexOf(0), results.length);
     matchValues.splice(matchValues.indexOf(0), matchValues.length);
 
-    for (var i = 0; i < results.length; i++) {
+    for (let i = 0; i < results.length; i++) {
       if (results[i]["title"] === userTitle) {
         matchValues.splice(i, 1)
         results.splice(i, 1)
@@ -147,15 +143,17 @@ class Recom extends Component {
               <center>
                 <div className="results">
                   <table>
+                    <tbody>
                     <tr>
-                      <th rowspan="2">
+                      <th rowSpan="2">
                         <img src={book.link} alt="book cover"/>
                       </th>
                       <td>
                         <div><h3>{book.title}</h3></div>
-                        <div><p>{book.author}</p></div>
+                        <div><p>{book.author_name}</p></div>
                       </td>
                     </tr>
+                    </tbody>
                   </table>
                 </div>
               </center>

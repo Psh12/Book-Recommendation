@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {toast} from 'react-toastify';
 import {Link} from 'react-router-dom';
+import './userProfile.css';
 
 class UserProfile extends Component {
   constructor () {
@@ -34,7 +35,7 @@ class UserProfile extends Component {
          headers: {"token": localStorage.token},
        });
        const parseRes = await response.json();
-       console.log(parseRes);
+      
        this.setState({userData: parseRes});
      } catch (error) {
        console.error(error.message);
@@ -73,26 +74,27 @@ class UserProfile extends Component {
   render() {
    
     return (
-        <div>
+        <div className = "profile">
           <center>
-            <h1>DashBoard {this.state.name}</h1>
-            
+            <h1>Welcome To Your Dashboard {this.state.name}</h1>
+            <div className = 'grid-container'>
            {
              this.state.userData.map(book =>{
                
               return (
-               <li key = {book.book_number}>
+               <div key = {book.book_number}>
                  <Link to = {{pathname: "/results", 
                 state:{
                   book: book,
                 }
-              }}><img src={book.link} alt ={book.title} width = "250" height = "250"></img></Link>
-                 <button onClick={()=>this.deleteBook(book.book_number, book.user_id )}>Delete</button>
-               </li>
+              }}><img className = "effects" src={book.link} alt ={book.title} width = "200" height = "250"></img></Link>
+                 <button className = 'delete-btn' onClick={()=>this.deleteBook(book.book_number, book.user_id )}>Delete</button>
+               </div>
              )
               }
              )
            }
+           </div>
           </center>
         </div>
     );

@@ -4,12 +4,7 @@ import {toast} from 'react-toastify';
 import './ResultPage.css';
 
 class ResultPage extends Component {
-  constructor(){
-    super();
-    this.state = {
-      recom: []
-    }
-  }
+ 
 
     addBook = async (book_number)=>{
       
@@ -20,23 +15,9 @@ class ResultPage extends Component {
       })
       const parseRes = await response.json();
       parseRes === "Successfully Added"? toast.success(parseRes) : toast.error(parseRes);
-      
     }
 
-    getBooks = async()=>{
-      const response = await fetch('http://localhost:5000/books',{
-        method: "GET",
-      });
-  
-      const parseRes = await response.json();
-     
-      this.setState({recom: parseRes});
-     
-    }
-
-    componentDidMount(){
-      this.getBooks();
-    }
+   
 
   render() {
     return (
@@ -53,7 +34,7 @@ class ResultPage extends Component {
                     <button className="add-btn" type="button" onClick = {()=>this.addBook(this.props.location.state.book.book_number)}>Click to Add</button>
                   </th>
                   <td>
-                    <div>Author: {this.props.location.state.book.author}</div>
+                    <div>Author: {this.props.location.state.book.author_name}</div>
                     <div>Genre: {this.props.location.state.book.genre}</div>
                     <div>Target Audience: {this.props.location.state.book.demographic}</div>
                     <br></br>
