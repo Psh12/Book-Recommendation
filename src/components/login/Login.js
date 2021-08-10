@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import {toast} from 'react-toastify';
-
-
-
+import "./Login.css";
 
 class LogIn extends Component {
   constructor () {
@@ -52,30 +50,30 @@ class LogIn extends Component {
   render () {  
 
     return (
-      <div>
-        <center>
-		    <h1 id='headers'>Login</h1>
-    
-        <div id='headers2'>
-          <br></br>
+      <div className="body">
+        <div className="register">
+  		    <h3 className='headers'>Login</h3>
+          <center>
+            <form action="" method="" onSubmit={this.handleSubmit}>
+              <table id="prompts">
+                <tr>
+                  <td>
+                    <input type="email" name="email" placeholder="E-Mail" onChange={this.handleChange} value={this.state.email} autoComplete = "off" required/>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="password" name="password" placeholder="Password" value = {this.state.password} onChange={this.handleChange}/>
+                  </td>
+                </tr>
+              </table>
+              <button className="submit">Login</button>
+            </form>
+            <Link to='/register'>
+              <button className="submit">Register</button>
+            </Link>
+          </center>
         </div>
-        <div id='box'>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="emailName">Email: </label>
-            <input type="email" name="email" onChange={this.handleChange} value={this.state.email} autoComplete = "off" required/>
-          </div>
-          <div>
-            <label htmlFor="password">Password: </label>
-            <input type="password" name="password" value = {this.state.password} onChange={this.handleChange}/>
-          </div>
-          <button>Login</button>
-        </form>
-        <Link to='/register'>Register</Link>
-        </div>
-        </center>
-        
-        
       </div>
     )
   }
