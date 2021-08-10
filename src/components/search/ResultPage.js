@@ -34,7 +34,7 @@ class ResultPage extends Component {
                     <button className="add-btn" type="button" onClick = {()=>this.addBook(this.props.location.state.book.book_number)}>Click to Add</button>
                   </th>
                   <td>
-                    <div>Author: {this.props.location.state.book.author}</div>
+                    <div>Author: {this.props.location.state.book.author_name}</div>
                     <div>Genre: {this.props.location.state.book.genre}</div>
                     <div>Target Audience: {this.props.location.state.book.demographic}</div>
                     <br></br>

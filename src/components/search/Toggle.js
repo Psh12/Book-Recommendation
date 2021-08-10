@@ -138,6 +138,7 @@ class Toggle extends Component {
           <center>
             <form action="" method="" onSubmit={this.handleSubmit}>
               <table id="filters">
+                <tbody>
                 <tr>
                   <td>
                     <label for="genre">Genre: </label>
@@ -172,6 +173,7 @@ class Toggle extends Component {
                     </select>
                   </td>
                 </tr>
+                </tbody>
               </table>
               <div className="toggle-submit">
                 <input type="submit" value="Submit" />
@@ -186,6 +188,7 @@ class Toggle extends Component {
               <center>
                 <div className="results">
                   <table>
+                    <tbody>
                     <tr>
                       <th rowspan="2">
                         <img src={book.link} alt="book cover"/>
@@ -195,6 +198,7 @@ class Toggle extends Component {
                           <div><p>{book.author}</p></div>
                       </td>
                     </tr>
+                    </tbody>
                   </table>
                 </div>
               </center>

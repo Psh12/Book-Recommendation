@@ -33,7 +33,7 @@ class Navbar extends Component {
               <Link to='/userProfile' className='nav-links'>User Page</Link>
             </li>
             <li className='nav-item'>
-              {this.props.auth? <Link onClick ={this.logOut} className='nav-links'>Log Out</Link> : <Link to='/login' className='nav-links'>Log In</Link>}
+              {this.props.auth? <Link to = '/login' onClick ={this.logOut} className='nav-links'>Log Out</Link> : <Link to='/login' className='nav-links'>Log In</Link>}
             </li>
           </ul>
         </div>

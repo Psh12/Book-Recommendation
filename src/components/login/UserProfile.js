@@ -74,9 +74,9 @@ class UserProfile extends Component {
   render() {
    
     return (
-        <div>
+        <div className = "profile">
           <center>
-            <h1>DashBoard {this.state.name}</h1>
+            <h1>Welcome To Your Dashboard {this.state.name}</h1>
             <div className = 'grid-container'>
            {
              this.state.userData.map(book =>{
@@ -87,7 +87,7 @@ class UserProfile extends Component {
                 state:{
                   book: book,
                 }
-              }}><img className = "effects" src={book.link} alt ={book.title} width = "250" height = "250"></img></Link>
+              }}><img className = "effects" src={book.link} alt ={book.title} width = "200" height = "250"></img></Link>
                  <button className = 'delete-btn' onClick={()=>this.deleteBook(book.book_number, book.user_id )}>Delete</button>
                </div>
              )

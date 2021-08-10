@@ -143,15 +143,17 @@ class Recom extends Component {
               <center>
                 <div className="results">
                   <table>
+                    <tbody>
                     <tr>
-                      <th rowspan="2">
+                      <th rowSpan="2">
                         <img src={book.link} alt="book cover"/>
                       </th>
                       <td>
                         <div><h3>{book.title}</h3></div>
-                        <div><p>{book.author}</p></div>
+                        <div><p>{book.author_name}</p></div>
                       </td>
                     </tr>
+                    </tbody>
                   </table>
                 </div>
               </center>
