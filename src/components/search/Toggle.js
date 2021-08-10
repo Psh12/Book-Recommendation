@@ -50,13 +50,13 @@ class Toggle extends Component {
     // Set all book match values to 0
     var matchValues = [];
 
-    for (var i = 0; i < this.state.books.length; i++) {
+    for (let i = 0; i < this.state.books.length; i++) {
       matchValues.push(0);
     };
 
     // Run through database list and if genre and demographics match, increase match value
 
-    for (var i = 0; i < this.state.books.length; i++) {
+    for (let i = 0; i < this.state.books.length; i++) {
       if (this.state.books[i]["genre"] === userGenre) {
         matchValues[i] += 1;
       };
@@ -81,7 +81,7 @@ class Toggle extends Component {
       var pivotValue = arr[pivot],
           partitionIndex = left;
 
-      for(var i = left; i < right; i++){
+      for(let i = left; i < right; i++){
         if(arr[i] > pivotValue){
           swap(arr, i, partitionIndex);
           partitionIndex++;
@@ -113,7 +113,7 @@ class Toggle extends Component {
     
     // Clear elements that don't match by running through the list from the last element
 
-    for (var i = results.length - 1; i >= 0; i--) {
+    for (let i = results.length - 1; i >= 0; i--) {
       // Delete last element if its value is less than the number of inputs or it's equal to 0
       if (matchValues[i] < criteria || matchValues[i] === 0) {
           matchValues.pop()
