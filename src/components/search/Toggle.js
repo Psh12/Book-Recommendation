@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import './Toggle.css';
+import './Search.css';
 
 
 class Toggle extends Component {
@@ -128,62 +128,76 @@ class Toggle extends Component {
 
     return (
       <div className="App">
-        <div style={{backgroundColor: '#121212', color: 'white'}}>
-          <div style={{textAlign: 'center', padding: '20px'}}>
-            <h1>Filtered Search</h1>
-            <Link to='/search'>
-              <button className='btns'>Normal Search</button>
-            </Link>
-          </div>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Select Genre:
-              <select value={this.state.check} onChange={this.handleChange}>
-                <option value=""></option>
-                <option value="Action">Action</option>
-                <option value="Adventure">Adventure</option>
-                <option value="Comedy">Comedy</option>
-                <option value="Mystery">Mystery</option>
-                <option value="Fantasy">Fantasy</option>
-                <option value="Fiction">Fiction</option>
-                <option value="Historical Fiction">Historical Fiction</option>
-                <option value="Horror">Horror</option>
-                <option value="Romance">Romance</option>
-                <option value="Satire">Satire</option>
-                <option value="Science Fiction">Science Fiction</option>
-                <option value="Speculative">Speculative</option>
-                <option value="Thriller">Thriller</option>
-                <option value="Western">Western</option>
-              </select>
-            </label>
-            <br/>
-            <label>
-              Select Age Demographics:
-              <select value={this.state.dem} onChange={this.handleDemChange}>
-                <option value=""></option>
-                <option value="Children">Children</option>
-                <option value="Teenagers">Teenagers</option>
-                <option value="Young Adult">Young Adult</option>
-                <option value="Adult">Adult</option>
-              </select>
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-          <br/>
+        <div className="top">
+          <h1>Filtered Search</h1>
+            <div className="toggle-comp">
+              <Link to='/search'>
+                <button className='btns'>Normal Search</button>
+              </Link>
+            </div>
+          <center>
+            <form action="" method="" onSubmit={this.handleSubmit}>
+              <table id="filters">
+                <tr>
+                  <td>
+                    <label for="genre">Genre: </label>
+                    <select id="genre" name="genre" value={this.state.check} onChange={this.handleChange}>
+                      <option value=""></option>
+                      <option value="Action">Action</option>
+                      <option value="Adventure">Adventure</option>
+                      <option value="Comedy">Comedy</option>
+                      <option value="Mystery">Mystery</option>
+                      <option value="Fantasy">Fantasy</option>
+                      <option value="Fiction">Fiction</option>
+                      <option value="Historical Fiction">Historical Fiction</option>
+                      <option value="Horror">Horror</option>
+                      <option value="Romance">Romance</option>
+                      <option value="Satire">Satire</option>
+                      <option value="Science Fiction">Science Fiction</option>
+                      <option value="Speculative">Speculative</option>
+                      <option value="Thriller">Thriller</option>
+                      <option value="Western">Western</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="demo">Age Demographic: </label>
+                    <select id="demo" name="demo" value={this.state.dem} onChange={this.handleDemChange}>
+                      <option value=""></option>
+                      <option value="Children">Children</option>
+                      <option value="Teenagers">Teenagers</option>
+                      <option value="Young Adult">Young Adult</option>
+                      <option value="Adult">Adult</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+              <div className="toggle-submit">
+                <input type="submit" value="Submit" />
+              </div>
+            </form>
+          </center>
         </div>
        <center>
       { resultBooks.map(book => 
           <div key={book.book_number}>
-            <Link to={{pathname: "/results", state: {book: book,} }} className="falseh1"> 
-              <div className="post-container">                
-                <div className="post-thumb">
-                  <img src={book.link} alt="book cover"/>
+            <Link to={{pathname: "/results", state: {book: book,} }} className="falseh1">
+              <center>
+                <div className="results">
+                  <table>
+                    <tr>
+                      <th rowspan="2">
+                        <img src={book.link} alt="book cover"/>
+                      </th>
+                      <td>
+                          <div><h3>{book.title}</h3></div>
+                          <div><p>{book.author}</p></div>
+                      </td>
+                    </tr>
+                  </table>
                 </div>
-                <div className="post-content">
-                  <div><h3>{book.title}</h3></div>
-                  <div><p>{book.author}</p></div>
-                </div>
-              </div>
+              </center>
             </Link>
           </div>
         )

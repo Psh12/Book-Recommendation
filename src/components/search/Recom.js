@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import './Toggle.css';
+import './Search.css';
 
 class Recom extends Component {
   constructor(props){
@@ -140,15 +140,21 @@ class Recom extends Component {
       { resultBooks.map(book => 
           <div key={book.book_number}>
             <Link onClick={this.fixBook()} to={{pathname: "/results", state: {book: book,} }} className="falseh1"> 
-              <div className="post-container">                
-                <div className="post-thumb">
-                  <img src={book.link} alt="book cover"/>
+              <center>
+                <div className="results">
+                  <table>
+                    <tr>
+                      <th rowspan="2">
+                        <img src={book.link} alt="book cover"/>
+                      </th>
+                      <td>
+                        <div><h3>{book.title}</h3></div>
+                        <div><p>{book.author}</p></div>
+                      </td>
+                    </tr>
+                  </table>
                 </div>
-                <div className="post-content">
-                  <div><h3>{book.title}</h3></div>
-                  <div><p>{book.author}</p></div>
-                </div>
-              </div>
+              </center>
             </Link>
           </div>
         )

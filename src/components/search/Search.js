@@ -49,35 +49,38 @@ class Search extends Component {
 
     return (
       <div className="App">
-        <div style={{backgroundColor: '#121212', color: 'white'}}>
-          <div style={{textAlign: 'center', padding: '20px'}}>
-            <h1>Book Search</h1>
-
+        <div className="top">
+          <h1>Book Search</h1>
+          <div className="search-comp">
             <Link to='/toggle'>
-              <button className='btns'>Toggle</button>
+              <button type="button">Toggle</button>
             </Link>
-            
-          
+            <form action="" method="">
+              <input type="text" name="search" placeholder="🔍 Search" onChange={this.searchHandler} value={term}/>
+            </form>
           </div>
-          <form>
-            <input type="text" onChange={this.searchHandler} value={term}/>
-          </form>
           <br/>
         </div>
        <center>
       { isTermBlank.length > 1 &&
         books.filter(searchingFor(term)).map(book => 
           <div key={book.book_number}>
-            <Link to={{pathname: "/results", state: {book: book,} }} className="falseh1"> 
-              <div className="post-container">                
-                <div className="post-thumb">
-                  <img src={book.link} alt="book cover"/>
+            <Link to={{pathname: "/results", state: {book: book,} }} className="falseh1">
+              <center>
+                <div className="results">
+                  <table>
+                    <tr>
+                      <th rowspan="2">
+                        <img src={book.link} alt="book cover"/>
+                      </th>
+                      <td>
+                          <div><h3>{book.title}</h3></div>
+                          <div><p>{book.author}</p></div>
+                      </td>
+                    </tr>
+                  </table>
                 </div>
-                <div className="post-content">
-                  <div><h3>{book.title}</h3></div>
-                  <div><p>{book.author}</p></div>
-                </div>
-              </div>
+              </center>
             </Link>
           </div>
         )
