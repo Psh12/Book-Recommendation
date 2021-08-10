@@ -1,8 +1,21 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import {toast} from 'react-toastify';
 import './Navbar.css'
 
 class Navbar extends Component {
+
+  logOut = (e)=>{
+    e.preventDefault();
+     try {
+      localStorage.removeItem("token");
+      this.props.setAuth(false);
+      toast.success("Logged Out Successfully");
+     } catch (error) {
+       console.error(error.message);
+     }
+      
+   }
   render() {
     return (
       <>
@@ -20,7 +33,7 @@ class Navbar extends Component {
               <Link to='/userProfile' className='nav-links'>User Page</Link>
             </li>
             <li className='nav-item'>
-              <Link to='/login' className='nav-links'>Log In</Link>
+              {this.props.auth? <Link onClick ={this.logOut} className='nav-links'>Log Out</Link> : <Link to='/login' className='nav-links'>Log In</Link>} 
             </li>
           </ul>
         </div>

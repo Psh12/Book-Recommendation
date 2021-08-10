@@ -8,7 +8,10 @@ import Register from './components/login/Register';
 import Search from './components/search/Search';
 import Toggle from './components/search/Toggle';
 import ResultPage from './components/search/ResultPage';
-import HomeDisplay from './components/home_display/HomeDisplay';
+import { toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
+
 
 class App extends Component {
   constructor() {
@@ -45,7 +48,7 @@ componentDidMount(){
     
     return (
         <Router>
-        <Navbar/>
+        <Navbar auth = {this.state.isAuthenticated} setAuth = {this.setAuth}/>
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/search" component={Search}/>
@@ -55,6 +58,7 @@ componentDidMount(){
                 <Redirect to= "/login"/>
               )
             )}/>
+  
             <Route exact path="/login" render={props => (
               !this.state.isAuthenticated ? (<LogIn {...props} setAuth = {this.setAuth}/>) : (
                 <Redirect to= "/userProfile"/>
@@ -66,7 +70,6 @@ componentDidMount(){
               )
             )}/>
             <Route exact path="/results" component={ResultPage}/>
-            <Route exact path="/test" component={HomeDisplay}/>
           </Switch>
         </Router>
     );
